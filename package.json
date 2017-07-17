@@ -1,0 +1,28 @@
+{
+  "name": "geogig-js",
+  "productName": "geogig-js",
+  "version": "0.5.0",
+  "description": "Module JS for spatial information versioning.",
+  "main": "main.js",
+  "scripts": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlanio/geogig-js.git"
+  },
+  "keywords": [
+    "geogig",
+    "locationtech",
+    "lib",
+    "gis",
+    "versioning"
+  ],
+  "author": "jlanio",
+  "license": "GPL-3.0",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
