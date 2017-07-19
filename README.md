@@ -11,6 +11,15 @@ npm install geogig-js
 ```
 
 ## Instructions for use
+```bash
+let Geogig = new geogigJS({
+  bin: "C:\\Users\\jlanio\\Geogig-Desktop\\app\\static\\geogig\\bin\\geogig.bat",
+  cwd: "C:\\Users\\jlanio\\Geogig-Desktop\\app\\static\\tmp"
+});
+
+Geogig.serve.init().then(succes => console.log(succes))
+
+```
 
 
 ## **Developing**
