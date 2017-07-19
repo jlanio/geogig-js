@@ -1,27 +1,20 @@
-const path = require("path").dirname(require.main.filename);
-const spawn = require('child_process').spawn;
-const exec = require("child_process").exec
+const { spawn, exec } = require('child_process');
 
-class Utils {
+module.exports = class Utils {
 
-	static pwd(name) {
-		return `${path}\\static\\tmp\\${name}`;
-	}
-
-	static geogig (args, name=''){
-		let stdoutData = '';
-		let stderrData = '';
-		let child = spawn(`${path}\\static\\geogig\\bin\\geogig.bat`, args, {cwd: this.pwd(name), detached: false});
+	static promiseProcess(child) {
 		child.stdout.setEncoding('utf8');
-		child.stdout.on('data', data => {stdoutData += data});
-		child.stderr.on('data', data => {stderrData += data});
-
 		return new Promise((resolve, reject) => {
-			child.on('close', code => stderrData ? reject(stderrData) : resolve(stdoutData));
-	    child.on('error', err => reject(err));
-      });
+				child.addListener("error", reject);
+				child.stdout.on('data', resolve);
+		});
 	}
-	static killServer (){
-		exec("taskkill /f /im java.exe", (error, stdout, stderr) => console.log(stdout));
+
+	static start (config) {
+		var child = spawn(config.bin, ['serve', '--multirepo'], {cwd: config.cwd, detached: false});
+		return this.promiseProcess(child);
+	}
+	static stop (){
+		return exec("taskkill /f /im java.exe", (error, stdout, stderr) => stdout);
 	}
 }
