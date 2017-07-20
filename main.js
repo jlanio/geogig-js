@@ -9,11 +9,3 @@ let geogig = new geogigJS({
 
 
 // let localhost = Geogig.serve.init().then(succes => console.log(succes))
-
-let localhost = geogig.serve.connect({uri: 'http://localhost:8182/repos'})
-
-let Acre = localhost.repos.findOne({name: 'Acre'});
-Acre.then(get => console.log(get.commit))
-
-let newRepo = geogig.repo({name:'JovenSS'});
-newRepo.init()

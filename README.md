@@ -19,6 +19,14 @@ let Geogig = new geogigJS({
 
 Geogig.serve.init().then(succes => console.log(succes))
 
+let localhost = geogig.serve.connect({uri: 'http://localhost:8182/repos'})
+
+let Acre = localhost.repos.findOne({name: 'Acre'});
+Acre.then(get => console.log(get.commit))
+
+let newRepo = geogig.repo({name:'Amazonas'});
+newRepo.init()
+
 ```
 
 
