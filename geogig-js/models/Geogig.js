@@ -1,6 +1,7 @@
 'use strict'
 
-const Serve = require('./Serve');
+const Serve = require('./Serve'),
+      Repo = require('./Repo');
 
 module.exports = class Geogig {
   constructor(config){
@@ -9,10 +10,15 @@ module.exports = class Geogig {
   get serve(){
     let serveInit = this._serve.serveInit;
     let serveStop = this._serve.serveStop;
+    let serveConnect = this._serve.connect;
 
     return {
       init: serveInit.bind(this._serve),
-      stop: serveStop.bind(this._serve)
+      stop: serveStop.bind(this._serve),
+      connect : serveConnect
     }
+  }
+  repo(ontions){
+    return new Repo(ontions);
   }
 }
