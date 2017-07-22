@@ -6,6 +6,7 @@ const Serve = require('./Serve'),
 module.exports = class Geogig {
   constructor(config){
     this._serve = new Serve(config);
+    this._config = config;
   }
   get serve(){
     let serveInit = this._serve.serveInit;
@@ -19,6 +20,6 @@ module.exports = class Geogig {
     }
   }
   repo(ontions){
-    return new Repo(ontions);
+    return new Repo(ontions, this._config);
   }
 }

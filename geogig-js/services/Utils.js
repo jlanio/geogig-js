@@ -17,4 +17,8 @@ module.exports = class Utils {
 	static stop (){
 		return exec("taskkill /f /im java.exe", (error, stdout, stderr) => stdout);
 	}
+	static initRepo (options, config) {
+		var child = spawn(config.bin, ['init', options.name], {cwd: config.cwd, detached: false});
+		return this.promiseProcess(child);
+	}
 }
