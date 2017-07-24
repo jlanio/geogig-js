@@ -1,15 +1,20 @@
 'use strict'
 
-const rp = require('request-promise'),
-      api = require('../helpers/web-api');
+const api = require('../services/web-api');
 
 module.exports = class Actions {
   constructor(repo){
     this._repo = repo[0]
     this._Adress = this._repo.href.replace('.json','/');
   }
-  get log(){
-    return this._Adress;
+  log(options){
+    return api.Log({Adress: this._Adress }, options);
+  }
+  get geopackage (){
+    return {
+      import: api.GeopackageImport.bind(this),
+      export: api.GeopackageExport.bind(this)
+    }
   }
   get beginTransaction() {
     return rp(`${this._Adress}beginTransaction.json`,{json: true}).then(e => JSON.parse(e).response);

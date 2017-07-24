@@ -9,17 +9,13 @@ module.exports = class Geogig {
     this._config = config;
   }
   get serve(){
-    let serveInit = this._serve.serveInit;
-    let serveStop = this._serve.serveStop;
-    let serveConnect = this._serve.connect;
-
     return {
-      init: serveInit.bind(this._serve),
-      stop: serveStop.bind(this._serve),
-      connect : serveConnect
+      init: this._serve.serveInit.bind(this._serve),
+      stop: this._serve.serveStop.bind(this._serve),
+      connect : this._serve.connect
     }
   }
-  repo(ontions){
-    return new Repo(ontions, this._config);
+  repo(options){
+    return new Repo(options, this._config);
   }
 }

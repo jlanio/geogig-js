@@ -1,8 +1,10 @@
+'use strict'
+
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
-module.exports =  function(obj){
-  return JSON.stringify(obj).replaceAll(':','=').replaceAll('"','')
-  .replaceAll(',','&').replaceAll('{','').replaceAll('}','').replaceAll('baseRequest=','');
+module.exports =  function(params, options){
+  return params.baseRequest + JSON.stringify(options).replaceAll(':','=').replaceAll('"','')
+  .replaceAll(',','&').replaceAll('{','').replaceAll('}','');
 }
