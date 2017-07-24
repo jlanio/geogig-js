@@ -12,21 +12,32 @@ npm install geogig-js
 
 ## Instructions for use
 ```bash
-let Geogig = new geogigJS({
-  bin: "C:\\Users\\jlanio\\Geogig-Desktop\\app\\static\\geogig\\bin\\geogig.bat",
-  cwd: "C:\\Users\\jlanio\\Geogig-Desktop\\app\\static\\tmp"
+'use strict';
+
+const geogigJS = require('./geogig-js/models/Geogig');
+// INITIAL CONFIG
+let geogig = new geogigJS({
+  bin: "C:\\geogig\\bin\\geogig.bat",
+  cwd: "C:\\patchForRepository"
 });
+// START SERVE
+// geogig.serve.init()
 
-Geogig.serve.init().then(succes => console.log(succes))
-
+// CONFIG connect to Serve
 let localhost = geogig.serve.connect({uri: 'http://localhost:8182/repos'})
 
-let Acre = localhost.repos.findOne({name: 'Acre'});
-Acre.then(get => console.log(get.commit))
+//INIT REPOSITORY IN LOCAL PATCH
+// let newRepo = geogig.repo({name:'Amazonas2'});
+// newRepo.init.then(e => console.log(e))
 
-let newRepo = geogig.repo({name:'Amazonas'});
-newRepo.init()
-
+let Amazonas = localhost.repos.findOne({name: 'Amazonas'});
+// Amazonas.then(get => get.log)
+// Amazonas.then(get => get.commit)
+// Amazonas.then(get => get.beginTransaction)
+Amazonas.then(get => get.endTransaction(
+  {transactionId: '60dc0d4b-8afa-47c2-a0ed-501d06bc3a16'},
+  {cancel: false}
+))
 ```
 
 

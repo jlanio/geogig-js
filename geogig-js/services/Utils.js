@@ -1,3 +1,5 @@
+'use strict'
+
 const { spawn, exec } = require('child_process');
 
 module.exports = class Utils {
@@ -17,8 +19,8 @@ module.exports = class Utils {
 	static stop (){
 		return exec("taskkill /f /im java.exe", (error, stdout, stderr) => stdout);
 	}
-	static initRepo (options, config) {
-		var child = spawn(config.bin, ['init', options.name], {cwd: config.cwd, detached: false});
+	static initRepo (rapams, config) {
+		var child = spawn(config.bin, ['init', rapams.name], {cwd: config.cwd, detached: false});
 		return this.promiseProcess(child);
 	}
 }
