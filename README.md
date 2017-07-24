@@ -11,7 +11,7 @@ npm install geogig-js
 ```
 
 ## Instructions for use
-```bash
+```jsx
 'use strict';
 
 const geogigJS = require('./geogig-js/models/Geogig');
