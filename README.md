@@ -28,16 +28,20 @@ let localhost = geogig.serve.connect({uri: 'http://localhost:8182/repos'})
 
 //Function for get all REPOSITORY. Return pormise.
 let allRepo = localhost.repos.find();
+
 //Or search current connection by REPOSITORY. Return pormise.
 // Can be used Amazonas.then().catch();
 let Amazonas = localhost.repos.findOne({name: 'Amazonas'});
 
 //get log in REPOSITORY.
 Amazonas.then(e => e.log).then(e => console.log(e));
-//get log in REPOSITORY.
+
+//get all commit ID in REPOSITORY.
 Amazonas.then(e => e.commit).then(e => console.log(e));
+
 //get transactionId for REPOSITORY.
 Amazonas.then(e => e.beginTransaction).then(e => console.log(e));
+
 //Exemple to  ENDtransaction.
 Amazonas.then(e => e.endTransaction(
   {transactionId: '60dc0d4b-8afa-47c2-a0ed-501d06bc3a16'},
