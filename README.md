@@ -55,11 +55,12 @@ Amazonas.then(e => e.geopackage.import({
     message: 'Ola Mundo'
   })
 ).then(e => console.log(e))
+
+//Exemple to export REPOSITORY
+Amazonas.then(get => get.geopackage.export(33)).then(e => console.log(e))
 ```
 
 ```jsx
-//Exemple to export REPOSITORY
-Amazonas.then(get => get.geopackage.export(33)).then(e => console.log(e))
 
 // INIT REPOSITORY IN LOCAL PATCH
 let Amazonas2 = geogig.repo({name:'Amazonas2'});
