@@ -12,7 +12,6 @@ npm install geogig-js
 
 ## Instructions for use
 ```jsx
-'use strict';
 
 const geogigJS = require('./bin/models/Geogig');
 // INITIAL CONFIG
@@ -56,7 +55,9 @@ Amazonas.then(e => e.geopackage.import({
     message: 'Ola Mundo'
   })
 ).then(e => console.log(e))
+```
 
+```jsx
 //Exemple to export REPOSITORY
 Amazonas.then(get => get.geopackage.export(33)).then(e => console.log(e))
 
