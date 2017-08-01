@@ -5,7 +5,8 @@
   "description": "Module JS for spatial information versioning.",
   "main": "main.js",
   "scripts": {
-    "babel:build": "babel src --out-dir lib"
+    "babel:build": "babel src --out-dir lib",
+    "babel:exec": "babel-node main.js"
   },
   "repository": {
     "type": "git",
