@@ -1,8 +1,6 @@
-'use strict'
+import {spawn, exec} from 'child_process';
 
-const { spawn, exec } = require('child_process');
-
-module.exports = class Utils {
+class Utils {
 
 	static promiseProcess(child) {
 		child.stdout.setEncoding('utf8');
@@ -24,3 +22,5 @@ module.exports = class Utils {
 		return this.promiseProcess(child);
 	}
 }
+
+export default Utils

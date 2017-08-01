@@ -1,10 +1,9 @@
-'use strict'
+import fs from 'fs';
+import rp from 'request-promise';
+import refactoringGET from '../helpers/web-api.helper';
 
-const fs = require("fs"),
-      rp = require('request-promise'),
-      refactoringGET = require('../helpers/web-api.helper');
+class Api  {
 
-module.exports  = class api  {
   static beginTransaction (x)  {
     return x
   }
@@ -78,3 +77,5 @@ module.exports  = class api  {
     return rp(this._Adress+task+'/download');
   }
 }
+
+export default Api

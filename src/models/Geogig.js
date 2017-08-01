@@ -1,9 +1,7 @@
-'use strict'
+import Serve from './Serve';
+import Repo from './Repo';
 
-const Serve = require('./Serve'),
-      Repo = require('./Repo');
-
-module.exports = class Geogig {
+class Geogig {
   constructor(config){
     this._serve = new Serve(config);
     this._config = config;
@@ -22,3 +20,5 @@ module.exports = class Geogig {
     }
   }
 }
+
+export default Geogig

@@ -5,6 +5,4 @@
  * Released under the GPL-3.0 License.
  */
 
- 'use strict';
-
- const geogigJS = require('./lib/models/Geogig');
+import geogigJS from './lib/models/Geogig'

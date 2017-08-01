@@ -1,10 +1,9 @@
-'use strict'
+import rp from 'request-promise';
+import Actions from './Repo.actions';
+import Utils from '../services/Utils';
 
-const rp = require('request-promise'),
-      Actions = require('./Repo.actions'),
-      Utils = require('../services/Utils');
+class Repo  {
 
-module.exports = class Repo  {
   constructor(params, config){
     this._params = params;
     this._config = config;
@@ -24,3 +23,4 @@ module.exports = class Repo  {
   }
 
 }
+export default Repo

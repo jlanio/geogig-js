@@ -1,6 +1,4 @@
-'use strict'
-
-const api = require('../services/web-api');
+import api from '../services/web-api';
 
 module.exports = class Actions {
   constructor(repo){

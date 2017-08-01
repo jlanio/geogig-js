@@ -1,10 +1,8 @@
-'use strict'
+import rp from 'request-promise';
+import Utils from '../services/Utils';
+import Repos from './Repo';
 
-const rp = require('request-promise'),
-      Utils = require('../services/Utils'),
-      Repos = require('./Repo');
-
-module.exports = class Serve{
+class Serve{
   constructor(config){
     this._config = config;
   }
@@ -18,3 +16,5 @@ module.exports = class Serve{
     return new Repos(Object.assign({}, uriAdress, {json: true}));
   }
 }
+
+export default Serve
