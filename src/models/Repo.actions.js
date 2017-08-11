@@ -7,23 +7,26 @@ class Actions {
     this._Adress = this._repo.href.replace('.json','/');
     this.joinParams = (params={}) => Object.assign({Adress: this._Adress}, params);
   }
+  get _params (){return {set: this.joinParams}}
+
   log(options){
     return api.Log(this.joinParams(), options)
   }
   get geopackage (){
     return {
-      import: (params) => api.Import(this.joinParams(params)),
-      export: (params) => api.Export(this.joinParams(params))
+      import: (params) => api.Import(this._params.set(params)),
+      export: (params) => api.Export(this._params.set(params))
     }
   }
   export(params, options){
-    return api.Export(this.joinParams(params));
+    return api.Export(this._params.set(params));
   }
   get beginTransaction() {
-    return api.beginTransaction(this.joinParams());
+    return api.beginTransaction(this._params.set(params));
   }
   endTransaction(params, options) {
-    return api.endTransaction(this.joinParams(params), options);
+    return api.endTransaction(this._params.set(params), options);
   }
 }
+
 module.exports = Actions

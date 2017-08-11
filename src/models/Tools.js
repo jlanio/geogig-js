@@ -8,21 +8,19 @@ class Repo  {
     this._config = config;
     this._ApiExtension = new ApiExtension(params);
   }
-  get repos(){
-    let action = this._ApiExtension;
+  get _apiEx (){return this._ApiExtension};
 
-    let find = () => action.repo.find();
-    let findOne = (filter) => action.repo.findOne(filter);
+  get repos(){
+    let find = () => this._apiEx.repo.find();
+    let findOne = (filter) => this._apiEx.repo.findOne(filter);
     return {
       find: find,
       findOne: findOne
     }
   };
   get tasks(){
-    let action = this._ApiExtension;
-
-    let find = () => action.tasks.find();
-    let findOne = (filter) => action.tasks.findOne(filter);
+    let find = () => this._apiEx.tasks.find();
+    let findOne = (filter) => this._apiEx.tasks.findOne(filter);
     return {
       find: find,
       findOne: findOne
