@@ -1,7 +1,7 @@
 {
   "name": "geogig-js",
   "productName": "geogig-js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Module JS for spatial information versioning.",
   "main": "main.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "babel-preset-latest": "^6.24.1"
   },
   "dependencies": {
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1"
   }
 }

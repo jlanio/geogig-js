@@ -1,4 +1,4 @@
-import {spawn, exec} from 'child_process';
+const {spawn, exec} = require ('child_process');
 
 class Utils {
 
@@ -23,4 +23,4 @@ class Utils {
 	}
 }
 
-export default Utils
+module.exports = Utils

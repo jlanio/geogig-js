@@ -6,4 +6,4 @@ let getItem = function(params, options) {
   return params.baseRequest + JSON.stringify(options).replaceAll(':','=').replaceAll('"','')
   .replaceAll(',','&').replaceAll('{','').replaceAll('}','');
 }
-export default getItem
+module.exports =  getItem

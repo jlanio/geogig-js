@@ -1,18 +1,22 @@
-import fs from 'fs';
-import rp from 'request-promise';
-import refactoringGET from '../helpers/web-api.helper';
+const fs = require ('fs');
+const rp = require ('request-promise');
+const refactoringGET = require ('../helpers/web-api.helper');
 
 class Api  {
 
-  static beginTransaction (x)  {
-    return x
+  static beginTransaction (params, options = {})  {
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'beginTransaction.json?'},{
+      }),{json: true}
+    );
   }
   static endTransaction(params, options = {}) {
-    return refactoringGET({
-      baseRequest: 'endTransaction.json?',
-      transactionId: params.transactionId,
-      cancel: options.cancel,
-    })
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'endTransaction.json?'},{
+        transactionId: params.transactionId,
+        cancel: options.cancel,
+      }),{json: true}
+    );
   }
   static Add (params, options = {}) {
     return {
@@ -45,11 +49,11 @@ class Api  {
       }),{json: true}
     );
   }
-  static GeopackageImport (params, options = {}) {
+  static Import (params, options = {}) {
     return rp({
       method: 'POST',
-      uri: refactoringGET({baseRequest: this._Adress+'import.json?'},{
-        format: 'gpkg',
+      uri: refactoringGET({baseRequest: params.Adress+'import.json?'},{
+        format: params.format,
         transactionId: params.transactionId,
         root: options.root,
         layer: options.layer,
@@ -66,16 +70,22 @@ class Api  {
       formData: {
         fileUpload:{
           value: fs.createReadStream(params.fileUpload),
-          options: { filename: 'imovel.gpkg', contentType: null }
+          options: { filename: 'imovel.gpkg', contentType: 'application/octet-stream;type=geopackage' }
         }
       },
       json: true
     });
   }
-  static GeopackageExport(task){
-    console.log(this._Adress+task+'/download');
-    return rp(this._Adress+task+'/download');
+  static Export (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'export.json?'},{
+        format: params.format,
+        path: options.path,
+        bbox: options.bbox,
+        interchange: options.interchange
+      }),{json: true}
+    );
   }
 }
 
-export default Api
+module.exports = Api

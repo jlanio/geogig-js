@@ -1,9 +1,8 @@
-import rp from 'request-promise';
-import Utils from '../services/Utils';
-import Repos from './Repo';
+const Utils = require ('../services/Utils');
+const Tools = require ('./Tools');
 
 class Serve{
-  constructor(config){
+  constructor(config= {uri: null}){
     this._config = config;
   }
   serveInit(){
@@ -12,9 +11,9 @@ class Serve{
   serveStop(){
     return Utils.stop(this._config);
   }
-  connect(uriAdress){
-    return new Repos(Object.assign({}, uriAdress, {json: true}));
+  connect(uri = {uri: null}){
+    return new Tools(uri);
   }
 }
 
-export default Serve
+module.exports = Serve

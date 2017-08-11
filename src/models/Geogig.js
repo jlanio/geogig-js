@@ -1,24 +1,27 @@
-import Serve from './Serve';
-import Repo from './Repo';
+const Serve = require ('./Serve');
+const Tools = require ('./Tools');
 
 class Geogig {
-  constructor(config){
+  constructor(config = {bin:null, cwd:null}){
     this._serve = new Serve(config);
-    this._config = config;
   }
   get serve(){
+    let serve = this._serve;
+
     return {
-      init: this._serve.serveInit.bind(this._serve),
-      stop: this._serve.serveStop.bind(this._serve),
-      connect: this._serve.connect
+      init: serve.serveInit.bind(serve),
+      stop: serve.serveStop.bind(serve),
+      connect: serve.connect
     }
   }
   repo(params){
-    let repo = new Repo(params, this._config);
+    let config = this._serve._config;
+    let repo = new Tools(params, config);
+
     return {
       init: repo.init
     }
   }
 }
 
-export default Geogig
+module.exports = Geogig
