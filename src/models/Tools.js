@@ -1,8 +1,7 @@
 const Utils = require ('../services/Utils');
 const ApiExtension = require('../services/web-api.extension');
 
-class Repo  {
-
+class Tools  {
   constructor(params, config){
     this._params = params;
     this._config = config;
@@ -13,6 +12,7 @@ class Repo  {
   get repos(){
     let find = () => this._apiEx.repo.find();
     let findOne = (filter) => this._apiEx.repo.findOne(filter);
+
     return {
       find: find,
       findOne: findOne
@@ -21,6 +21,7 @@ class Repo  {
   get tasks(){
     let find = () => this._apiEx.tasks.find();
     let findOne = (filter) => this._apiEx.tasks.findOne(filter);
+
     return {
       find: find,
       findOne: findOne
@@ -30,4 +31,4 @@ class Repo  {
     return Utils.initRepo(this._params, this._config);
   };
 }
-module.exports = Repo
+module.exports = Tools

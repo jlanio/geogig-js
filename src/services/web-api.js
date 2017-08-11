@@ -3,7 +3,7 @@ const rp = require ('request-promise');
 const refactoringGET = require ('../helpers/web-api.helper');
 
 class Api  {
-
+  //Transactions
   static beginTransaction (params, options = {})  {
     return rp(
       refactoringGET({baseRequest: params.Adress+'beginTransaction.json?'},{
@@ -18,17 +18,72 @@ class Api  {
       }),{json: true}
     );
   }
+  //Porcelain commands supported
   static Add (params, options = {}) {
-    return {
-      path: path,
-      transactionId: transactionId
-    }
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'add.json?'},{
+        transactionId: params.transactionId,
+        path: options.path
+      }),{json: true}
+    );
   }
   static Blame (params, options = {}) {
-    return {
-      commit: commit,
-      path: path
-    }
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'blame.json?'},{
+        path: params.path,
+        commit: options.commit
+      }),{json: true}
+    );
+  }
+  static Branch (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'branch.json?'},{
+        list: params.list,
+        remotes: options.remotes
+      }),{json: true}
+    );
+  }
+  static Checkout (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'checkout.json?'},{
+        transactionId: params.transactionId,
+        branch: options.branch,
+        ours: options.ours,
+        theirs: options.theirs,
+        path: options.path
+      }),{json: true}
+    );
+  }
+  static Commit (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'commit.json?'},{
+        transactionId: params.transactionId,
+        message: options.message
+        all: options.all
+        authorName: options.authorName
+        authorEmail: options.authorEmail
+      }),{json: true}
+    );
+  }
+  static Diff (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'diff.json?'},{
+        oldRefSpec: params.oldRefSpec,
+        newRefSpec: options.newRefSpec,
+        pathFilter: options.newRefSpec,
+        showGeometryChanges: options.newRefSpec,
+        page: options.newRefSpec,
+        show: options.newRefSpec
+      }),{json: true}
+  }
+  static Fetch (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'fetch.json?'},{
+        prune: options.prune,
+        all: options.all,
+        remote: options.remote
+      }),{json: true}
+    );
   }
   static Log (params, options = {}) {
     return rp(
@@ -49,6 +104,99 @@ class Api  {
       }),{json: true}
     );
   }
+  static Merge (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'merge.json?'},{
+        transactionId: params.transactionId,
+        commit: params.commit,
+        noCommit: options.noCommit,
+        authorName: options.authorName,
+        authorEmail: options.authorEmail
+      }),{json: true}
+    );
+  }
+  static Pull (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'pull.json?'},{
+        remoteName: options.remoteName,
+        all: options.all,
+        ref: options.ref,
+        authorName: options.authorName,
+        authorEmail: options.authorEmail
+      }),{json: true}
+    );
+  }
+  static Push (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'push.json?'},{
+        all: options.all
+        ref: options.ref,
+        remoteName: options.remoteName
+      }),{json: true}
+    );
+  }
+  static Remote (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'remote.json?'},{
+        list: options.list,
+        remove: options.remove,
+        ping: options.ping,
+        update: options.update,
+        verbose: options.verbose,
+        remoteName: options.remoteName,
+        newName: options.newName,
+        remoteURL: options.remoteURL,
+        username: options.username,
+        password: options.password
+      }),{json: true}
+    );
+  }
+  static Remove (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'remove.json?'},{
+        path: params.path,
+        recursive: options.recursive
+      }),{json: true}
+    );
+  }
+  static Status (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'status.json?'},{
+        limit: options.limit,
+        offset: options.offset
+      }),{json: true}
+    );
+  }
+  static Tag (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'tag.json?'},{
+        name: params.name,
+        message: params.message,
+        commit: params.commit
+      }),{json: true}
+    );
+  }
+  static Version (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: params.Adress+'version.json?'},{
+      }),{json: true}
+    );
+  }
+  // Plumbing Commands Supported
+  static FeatureDiff (){}
+  static LsTree (){}
+  static RefParse (){}
+  static UpdateRef (){}
+  static RebuildGraph (){}
+  //Web-API Specific
+  static GetCommitGraph (){}
+  static ResolveConflict (){}
+  static RevertFeature (){}
+  //Repo Commands
+  static MergeFeature (){}
+  static Manifest (){}
+
+  //GeoPackage
   static Import (params, options = {}) {
     return rp({
       method: 'POST',
