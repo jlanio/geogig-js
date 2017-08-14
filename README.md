@@ -13,7 +13,7 @@ npm install geogig-js
 ## Instructions for use
 ```jsx
 
-const geogigJS = require('./bin/models/Geogig');
+const geogigJS = require('geogig-js');
 // INITIAL CONFIG
 let geogig = new geogigJS({
   bin: "C:\\geogig\\bin\\geogig.bat",
