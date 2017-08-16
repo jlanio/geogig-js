@@ -17,9 +17,11 @@ class Actions {
   get beginTransaction() {
     return api.beginTransaction(this._params.set(params));
   }
-
+  get lsTree() {
+    return api.LsTree(this._params.set()).then(result => result.response);
+  }
   log(options){
-    return api.Log(this.joinParams(), options)
+    return api.Log(this.joinParams(), options).then(result => result.response);
   }
   export(params, options){
     return api.Export(this._params.set(params));

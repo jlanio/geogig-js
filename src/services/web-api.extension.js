@@ -9,7 +9,7 @@ class ApiExtension  {
 
   get repo (){
     let find = () => {
-      return rp(this._params.uri + '/repos', {json: true}).then(data => data.repos.repo[0]);
+      return rp(this._params.uri + '/repos', {json: true}).then(data => data.repos);
     };
     let findOne = (filter) => {
       return rp(this._params.uri + '/repos', {json: true})
