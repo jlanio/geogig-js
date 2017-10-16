@@ -1,25 +1,23 @@
-const Serve = require ('./Serve');
 const Tools = require ('./Tools');
+const Utils = require ('../services/utils');
 
 class Geogig {
   constructor(config = {bin:null, cwd:null}){
-    this._serve = new Serve(config);
+    this._config = config;
   }
   get serve(){
-    let serve = this._serve;
 
     return {
-      init: serve.serveInit.bind(serve),
-      stop: serve.serveStop.bind(serve),
-      connect: serve.connect
+      init: Utils.start(this._config),
+      stop: Utils.stop,
+      connect: (uri = {uri: null}) => new Tools(uri, this._config)
     }
   }
   repo(params){
-    let config = this._serve._config;
-    let repo = new Tools(params, config);
 
     return {
-      init: repo.init
+      init: Utils.initRepo(params, this._config),
+      clone: Utils.cloneRepo(params, this._config)
     }
   }
 }

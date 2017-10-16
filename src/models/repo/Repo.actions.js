@@ -1,4 +1,4 @@
-const api = require ('../services/web-api');
+const api = require ('../../services/web-api');
 
 class Actions {
   constructor(repo){
@@ -14,11 +14,11 @@ class Actions {
       export: (params) => api.Export(this._params.set(params))
     }
   }
-  get beginTransaction() {
-    return api.beginTransaction(this._params.set(params));
-  }
   get lsTree() {
     return api.LsTree(this._params.set()).then(result => result.response);
+  }
+  get beginTransaction() {
+    return api.beginTransaction(this._params.set());
   }
   log(options){
     return api.Log(this.joinParams(), options).then(result => result.response);

@@ -1,6 +1,6 @@
 const fs = require ('fs');
 const rp = require ('request-promise');
-const refactoringGET = require ('../helpers/web-api.helper');
+const refactoringGET = require ('./helpers/web-api.helper');
 
 class Api  {
   //Transactions
