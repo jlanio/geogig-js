@@ -3,49 +3,52 @@ const rp = require ('request-promise');
 const refactoringGET = require ('./helpers/web-api.helper');
 
 class Api  {
+  constructor(params = {uri: null}){
+    this._params = params
+  }
   //Transactions
-  static beginTransaction (params, options = {})  {
+  beginTransaction (params, options = {})  {
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}beginTransaction.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}beginTransaction.json?`},{
       }),{json: true}
     );
   }
-  static endTransaction(params, options = {}) {
+  endTransaction(params, options = {}) {
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}endTransaction.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}endTransaction.json?`},{
         transactionId: params.transactionId,
         cancel: options.cancel,
       }),{json: true}
     );
   }
   //Porcelain commands supported
-  static Add (params, options = {}) {
+  Add (params, options = {}) {
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}add.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}add.json?`},{
         transactionId: params.transactionId,
         path: options.path
       }),{json: true}
     );
   }
-  static Blame (params, options = {}) {
+  Blame (params, options = {}) {
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}blame.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}blame.json?`},{
         path: params.path,
         commit: options.commit
       }),{json: true}
     );
   }
-  static Branch (params, options = {}){
+  Branch (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}branch.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}branch.json?`},{
         list: params.list,
         remotes: options.remotes
       }),{json: true}
     );
   }
-  static Checkout (params, options = {}){
+  Checkout (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}checkout.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}checkout.json?`},{
         transactionId: params.transactionId,
         branch: options.branch,
         ours: options.ours,
@@ -54,9 +57,9 @@ class Api  {
       }),{json: true}
     );
   }
-  static Commit (params, options = {}){
+  Commit (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}commit.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}commit.json?`},{
         transactionId: params.transactionId,
         message: options.message,
         all: options.all,
@@ -65,9 +68,9 @@ class Api  {
       }),{json: true}
     );
   }
-  static Diff (params, options = {}){
+  Diff (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}diff.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}diff.json?`},{
         oldRefSpec: params.oldRefSpec,
         newRefSpec: options.newRefSpec,
         pathFilter: options.newRefSpec,
@@ -77,18 +80,18 @@ class Api  {
       }),{json: true}
     );
   }
-  static Fetch (params, options = {}){
+  Fetch (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}fetch.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}fetch.json?`},{
         prune: options.prune,
         all: options.all,
         remote: options.remote
       }),{json: true}
     );
   }
-  static Log (params, options = {}) {
+  Log (options = {}) {
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}log.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}log.json?`},{
         limit: options.limit,
         offset: options.offset,
         path: options.path,
@@ -105,9 +108,9 @@ class Api  {
       }),{json: true}
     );
   }
-  static Merge (params, options = {}){
+  Merge (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}merge.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}merge.json?`},{
         transactionId: params.transactionId,
         commit: params.commit,
         noCommit: options.noCommit,
@@ -116,9 +119,9 @@ class Api  {
       }),{json: true}
     );
   }
-  static Pull (params, options = {}){
+  Pull (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}pull.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}pull.json?`},{
         remoteName: options.remoteName,
         all: options.all,
         ref: options.ref,
@@ -127,18 +130,18 @@ class Api  {
       }),{json: true}
     );
   }
-  static Push (params, options = {}){
+  Push (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}push.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}push.json?`},{
         all: options.all,
         ref: options.ref,
         remoteName: options.remoteName
       }),{json: true}
     );
   }
-  static Remote (params, options = {}){
+  Remote (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}remote.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}remote.json?`},{
         list: options.list,
         remove: options.remove,
         ping: options.ping,
@@ -152,41 +155,41 @@ class Api  {
       }),{json: true}
     );
   }
-  static Remove (params, options = {}){
+  Remove (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}remove.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}remove.json?`},{
         path: params.path,
         recursive: options.recursive
       }),{json: true}
     );
   }
-  static Status (params, options = {}){
+  Status (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}status.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}status.json?`},{
         limit: options.limit,
         offset: options.offset
       }),{json: true}
     );
   }
-  static Tag (params, options = {}){
+  Tag (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}tag.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}tag.json?`},{
         name: params.name,
         message: params.message,
         commit: params.commit
       }),{json: true}
     );
   }
-  static Version (params, options = {}){
+  Version (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}version.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}version.json?`},{
       }),{json: true}
     );
   }
   // Plumbing Commands Supported
-  static FeatureDiff (params, options = {}){
+  FeatureDiff (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}featurediff.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}featurediff.json?`},{
         path: params.path,
         newTreeish: options.newTreeish,
         oldTreeish: options.oldTreeish,
@@ -194,9 +197,9 @@ class Api  {
       }),{json: true}
     );
   }
-  static LsTree (params, options = {}){
+  LsTree (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}ls-tree.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}ls-tree.json?`},{
         showTree: options.showTree,
         onlyTree : options.onlyTree,
         recursive: options.recursive,
@@ -205,23 +208,23 @@ class Api  {
       }),{json: true}
     );
   }
-  static RebuildGraph (params, options = {}){
+  RebuildGraph (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}rebuildgraph.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}rebuildgraph.json?`},{
         quiet: options.quiet
       }),{json: true}
     );
   }
-  static RefParse (params, options = {}){
+  RefParse (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}refparse.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}refparse.json?`},{
         name: params.name
       }),{json: true}
     );
   }
-  static UpdateRef (params, options = {}){
+  UpdateRef (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}updateref.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}updateref.json?`},{
         name: params.name,
         delete: options.delete,
         newValue: options.delete
@@ -230,9 +233,9 @@ class Api  {
   }
 
   //Web-API Specific
-  static GetCommitGraph (params, options = {}){
+  GetCommitGraph (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}getCommitGraph.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}getCommitGraph.json?`},{
         depth: options.depth,
         commitId: params.commitId,
         page: options.page,
@@ -241,18 +244,18 @@ class Api  {
     );
   }
 
-  static ResolveConflict (params, options = {}){
+  ResolveConflict (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}resolveconflict.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}resolveconflict.json?`},{
           transactionId: params.transactionId,
           path: options.path,
           objectid: options.objectid
         }),{json: true}
       );
     }
-  static RevertFeature (){
+  RevertFeature (){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}revertfeature.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}revertfeature.json?`},{
         transactionId: params.transactionId,
         newCommitId: params.newCommitId,
         oldCommitId: params.oldCommitId,
@@ -265,14 +268,15 @@ class Api  {
     );
   }
   //Repo Commands
-  static MergeFeature (){}
-  static Manifest (){}
+  MergeFeature (){}
+  Manifest (){}
 
   //GeoPackage
-  static Import (params, options = {}) {
+  Import (params, options = {}) {
+
     return rp({
       method: 'POST',
-      uri: refactoringGET({baseRequest: `${params.Adress}import.json?`},{
+      uri: refactoringGET({baseRequest: `${this._params.uri}import.json?`},{
         format: params.format,
         transactionId: params.transactionId,
         root: options.root,
@@ -296,9 +300,9 @@ class Api  {
       json: true
     });
   }
-  static Export (params, options = {}){
+  Export (params, options = {}){
     return rp(
-      refactoringGET({baseRequest: `${params.Adress}export.json?`},{
+      refactoringGET({baseRequest: `${this._params.uri}export.json?`},{
         format: params.format,
         path: options.path,
         bbox: options.bbox,

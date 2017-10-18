@@ -6,7 +6,8 @@
   "main": "main.js",
   "scripts": {
     "babel:build": "babel src --out-dir lib",
-    "babel:exec": "babel-node main.js"
+    "babel:exec": "babel-node geogig-js.test.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,11 @@
   "author": "jlanio",
   "license": "GPL-3.0",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-latest": "^6.24.1"
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-jest": "^21.2.0",
+    "jest": "^21.2.1",
+    "regenerator-runtime": "^0.11.0"
   },
   "dependencies": {
     "es6-promise": "^4.1.1",

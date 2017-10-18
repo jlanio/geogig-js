@@ -5,6 +5,6 @@
  * Released under the GPL-3.0 License.
  */
 
-let geogigJS = require('./lib/models/Geogig')
+let geogigJS = require('./src/models/Geogig')
 // import geogigJS from './lib/models/Geogig'
 module.exports = geogigJS;

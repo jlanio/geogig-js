@@ -1,5 +1,5 @@
-const Tools = require ('./Tools');
-const Utils = require ('../services/utils');
+const Utils = require('../services/helpers/utils')
+const webApiExt = require('../services/web-api.extension')
 
 class Geogig {
   constructor(config = {bin:null, cwd:null}){
@@ -10,7 +10,7 @@ class Geogig {
     return {
       init: Utils.start(this._config),
       stop: Utils.stop,
-      connect: (uri = {uri: null}) => new Tools(uri, this._config)
+      connect: (params = {uri: null}) => new webApiExt(params, this._config)
     }
   }
   repo(params){

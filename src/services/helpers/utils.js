@@ -1,4 +1,4 @@
-const {spawn, exec} = require ('child_process');
+const {spawn, exec} = require('child_process')
 
 class Utils {
 
