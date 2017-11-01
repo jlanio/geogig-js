@@ -9,23 +9,24 @@ class ApiExtension  {
 
   get repos (){
 
-    let find = () => rp(`${this._uri}/repos`, {json: true}).then(data => data.repos);
+    let findAll = () => rp(`${this._uri}/repos`, {json: true}).then(data => data.repos);
     let findOne = (filter) => {
       let fullUri = `${this._uri}/repos/${filter.name}/`
       return rp(fullUri, {json: true}).then(data => new Actions({uri: fullUri}))
     }
 
     return{
-      find: find,
+      findAll: findAll,
       findOne: findOne
     }
   };
   get tasks(){
-    let find = () => rp(`${this._uri}/tasks`, {json: true})
+    
+    let findAll = () => rp(`${this._uri}/tasks`, {json: true})
     let findOne = (tasksID) => rp(`${this._uri}/tasks/${tasksID}`, {json: true})
 
     return {
-      find: find,
+      findAll: findAll,
       findOne: findOne
     }
   }

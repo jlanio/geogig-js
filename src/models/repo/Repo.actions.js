@@ -13,14 +13,12 @@ class Actions {
   }
   lsTree() {
     return this._api.LsTree().then(result => result.response)
-    // return api.LsTree(this._params.set()).then(result => result.response);
   }
   beginTransaction() {
     return this._api.beginTransaction().then(result => result.response);
   }
   log(params){
     return this._api.Log(params).then(result => result.response);
-    // return api.Log(this.joinParams(), options).then(result => result.response);
   }
   export(params, options){
     return this._api.Export(params);
