@@ -8,7 +8,7 @@ class Geogig {
   get serve(){
 
     return {
-      init: Utils.start(this._config),
+      start: Utils.start(this._config),
       stop: Utils.stop,
       connect: (params = {uri: null}) => new webApiExt(params, this._config)
     }

@@ -4,7 +4,7 @@ const refactoringGET = require ('./helpers/web-api.helper');
 
 class Api  {
   constructor(params = {uri: null}){
-    this._params = params
+    this._params = params.uri
   }
   //Transactions
   beginTransaction (params, options = {})  {
@@ -68,19 +68,19 @@ class Api  {
       }),{json: true}
     );
   }
-  Diff (params, options = {}){
+  Diff (options = {}){
     return rp(
       refactoringGET({baseRequest: `${this._params.uri}diff.json?`},{
-        oldRefSpec: params.oldRefSpec,
+        oldRefSpec: options.oldRefSpec,
         newRefSpec: options.newRefSpec,
-        pathFilter: options.newRefSpec,
-        showGeometryChanges: options.newRefSpec,
-        page: options.newRefSpec,
-        show: options.newRefSpec
+        pathFilter: options.pathFilter,
+        showGeometryChanges: options.showGeometryChanges,
+        page: options.page,
+        show: options.show
       }),{json: true}
     );
   }
-  Fetch (params, options = {}){
+  Fetch (options = {}){
     return rp(
       refactoringGET({baseRequest: `${this._params.uri}fetch.json?`},{
         prune: options.prune,
@@ -139,7 +139,7 @@ class Api  {
       }),{json: true}
     );
   }
-  Remote (params, options = {}){
+  Remote (options = {}){
     return rp(
       refactoringGET({baseRequest: `${this._params.uri}remote.json?`},{
         list: options.list,
@@ -307,6 +307,24 @@ class Api  {
         path: options.path,
         bbox: options.bbox,
         interchange: options.interchange
+      }),{json: true}
+    );
+  }
+  // Web API: Serving and Managing Repositories
+  Init (params, options = {}){
+    return rp(
+      refactoringGET({baseRequest: `${this._params.uri}/init.json?`},{
+        "parentDirectory": options.parentDirectory,
+        "authorName": options.authorName,
+        "authorEmail": options.authorEmail,
+        "dbName":  options.dbName,
+        "dbPassword": options.dbPassword,
+        "dbHost": options.dbHost,
+        "dbPort": options.dbPort,
+        "dbSchema": options.dbSchema,
+        "dbUser": options.dbUser,
+        "authorName": options.authorName,
+        "authorEmail": options.authorEmail
       }),{json: true}
     );
   }

@@ -7,8 +7,8 @@ class Actions {
 
   get geopackage (){
     return {
-      import: (params) => this._api.Import(params),
-      export: (params) => this._api.Export(params)
+      import: (params, options) => this._api.Import(params, options),
+      export: (params, options) => this._api.Export(params, options)
     }
   }
   lsTree() {
@@ -21,10 +21,26 @@ class Actions {
     return this._api.Log(params).then(result => result.response);
   }
   export(params, options){
-    return this._api.Export(params);
+    return this._api.Export(params, options);
   }
   endTransaction(params, options) {
     return this._api.endTransaction(params, options);
+  }
+  diff(options) {
+    return this._api.Diff(options);
+  }
+  remote(options) {
+    return this._api.Remote(options);
+  }
+
+  featureDiff(params, options) {
+    return this._api.FeatureDiff(params, options);
+  }
+  add(params){
+    return this._api.Add(params);
+  }
+  commit(params, options = {}){
+    return this._api.Commit(params, options);
   }
 }
 
