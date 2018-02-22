@@ -20,6 +20,12 @@ class Geogig {
       clone: Utils.cloneRepo(params, this._config)
     }
   }
+  config(params){
+    
+    return {
+      config: Utils.config(params, this._config)
+    }
+  }
 }
 
 module.exports = Geogig

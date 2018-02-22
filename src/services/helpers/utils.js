@@ -25,6 +25,11 @@ class Utils {
 		let child = spawn(config.bin, ['clone', params.uri, params.name], {cwd: config.cwd, detached: false});
 		return this.promiseProcess(child);
 	}
+	static config (params, config) {
+		let childName = spawn(config.bin, ['config', '--global', 'user.name', params.user], {cwd: config.cwd, detached: false});
+		let childEmail = spawn(config.bin, ['config', '--global', 'user.email', params.email], {cwd: config.cwd, detached: false});
+		return Promise.all([this.promiseProcess(childName),this.promiseProcess(childEmail)]);
+	}
 }
 
 module.exports = Utils
