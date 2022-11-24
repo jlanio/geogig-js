@@ -30,6 +30,8 @@
     "regenerator-runtime": "^0.11.0"
   },
   "dependencies": {
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "minimatch": ">=3.0.5"
+
   }
 }
